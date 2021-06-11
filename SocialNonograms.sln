@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.API", "SN.API\SN.API.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.DAL", "SN.DAL\SN.DAL.csproj", "{4B32654E-2E3B-4451-B4CC-8175BFDD3BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.ApiServices", "SN.ApiServices\SN.ApiServices.csproj", "{54351C02-FE56-4D27-B50F-3B733142FCDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.Model", "SN.Model\SN.Model.csproj", "{581BA8E0-0FFE-44B8-9136-42598DE70CD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{4B32654E-2E3B-4451-B4CC-8175BFDD3BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B32654E-2E3B-4451-B4CC-8175BFDD3BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B32654E-2E3B-4451-B4CC-8175BFDD3BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54351C02-FE56-4D27-B50F-3B733142FCDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54351C02-FE56-4D27-B50F-3B733142FCDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54351C02-FE56-4D27-B50F-3B733142FCDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54351C02-FE56-4D27-B50F-3B733142FCDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{581BA8E0-0FFE-44B8-9136-42598DE70CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{581BA8E0-0FFE-44B8-9136-42598DE70CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{581BA8E0-0FFE-44B8-9136-42598DE70CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{581BA8E0-0FFE-44B8-9136-42598DE70CD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
