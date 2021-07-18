@@ -1,0 +1,34 @@
+﻿@page "/Game/{Id:int}"
+@using SN.Model
+@using SN.ClientServices.Services.Abstract
+@inject IGameService _gameService
+
+@if (GameModel is null)
+{
+    <h3>Retrieving the Game</h3>
+}
+else
+{
+    <div class="container justify-content-center">
+        <h3>Game #@Id Name: @GameModel.Name</h3>
+        <Board BoardModel="@GameModel.Answer">
+
+        </Board>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    public GameModel GameModel { get; set; }
+
+    protected override async void OnInitialized()
+    {
+        GameModel = await _gameService.GetAsync(Id);
+        Console.WriteLine("Game Received!");
+        StateHasChanged();
+    }
+
+}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SN.ApiServices;
 using SN.ApiServices.Abstract;
 using SN.DAL;
 using SN.DAL.Abstract;
@@ -22,6 +25,7 @@ namespace SN.API
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +36,17 @@ namespace SN.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyOrigin();
+                    });
+            });
+            
             services
                 .AddControllersWithViews()
                 .AddNewtonsoftJson();
@@ -41,6 +56,8 @@ namespace SN.API
             
             services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
             services.AddScoped(typeof(IService<,>), typeof(GenericService<,>));
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IUserService, UserService>();
             
             services.AddControllersWithViews(options =>
             {
@@ -48,6 +65,24 @@ namespace SN.API
             });
             
             services.AddControllers();
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = "JwtBearer";
+                    options.DefaultChallengeScheme = "JwtBearer";
+                })
+                .AddJwtBearer("JwtBearer", options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Nonograms are fun")),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.FromMinutes(5)
+                    };
+                });
+
+            services.AddCors();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "SN.API", Version = "v1"}); });
         }
 
@@ -81,6 +116,8 @@ namespace SN.API
 
             app.UseRouting();
 
+            app.UseCors(MyAllowSpecificOrigins);  
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

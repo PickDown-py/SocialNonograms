@@ -1,0 +1,63 @@
+﻿table, th, td {
+    border: 3px solid slategrey;
+    border-collapse: collapse;
+}
+
+table {
+    width: 47%;
+    table-layout: fixed;
+}
+td {
+    position: relative;
+    vertical-align: top;
+}
+td:after {
+    content: '';
+    display: block;
+    margin-top: 100%;
+}
+td .content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 80%;
+    float: top;
+    text-align: center;
+}
+
+th, td {
+    padding: 2px;
+}
+
+.empty {
+    
+}
+
+.filled {
+    background: black;
+}
+
+.crossed {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "\274c"; /* use the hex value here... */
+    font-size: 50px;
+    color: black;
+    line-height: 100px;
+    text-align: center;
+}
+
+.number {
+    background: coral;
+    color: white;
+}
+
+.corner {
+    background: white;
+    border: 0;
+}

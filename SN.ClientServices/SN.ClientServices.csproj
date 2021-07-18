@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SN.Entity\SN.Entity.csproj" />
+      <ProjectReference Include="..\SN.Model\SN.Model.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Blazored.LocalStorage" Version="4.1.2" />
+      <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.7" />
+      <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Owin.Cors" Version="4.2.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+</Project>

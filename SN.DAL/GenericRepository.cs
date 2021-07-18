@@ -28,6 +28,7 @@ namespace SN.DAL
 
         public void Update(TEntity entity)
         {
+            _set.Update(entity);
             _db.SaveChanges();
         }
         
@@ -41,9 +42,11 @@ namespace SN.DAL
             return await _set.Where(predicate).FirstOrDefaultAsync();
         }
 
-        public async Task<TEntity> GetInclude(Expression<Func<TEntity, object>> includes, TKey key)
+        public async Task<TEntity> GetInclude(TKey key, params Expression<Func<TEntity, object>>[] includes)
         {
-            return await _set.Include(includes).FirstOrDefaultAsync(e => e.Id.Equals(key));
+            return await includes.Aggregate(_set.AsQueryable(), 
+                    (current, include) => current.Include(include))
+                .FirstOrDefaultAsync(e => e.Id.Equals(key));
         }
 
         public async Task<bool> Exists(TKey key)
@@ -76,9 +79,11 @@ namespace SN.DAL
             return await _set.Where(predicate).ToListAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllInclude(Expression<Func<TEntity, object>> includes)
+        public async Task<IEnumerable<TEntity>> GetAllInclude(params Expression<Func<TEntity, object>>[] includes)
         {
-            return await _set.Include(includes).ToListAsync();
+            return await includes.Aggregate(_set.AsQueryable(), 
+                (current, include) => current.Include(include))
+                .ToListAsync();
         }
 
         public async Task Delete(TKey key)

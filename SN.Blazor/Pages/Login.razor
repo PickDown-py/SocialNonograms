@@ -1,0 +1,66 @@
+﻿@page "/login"
+
+@inject IAuthenticationService _authService
+@inject NavigationManager _navigationManager
+@using SN.Model
+@using SN.ClientServices.Services.Abstract
+<h3>Login</h3>
+
+@if (_showAuthenticationError)
+{
+    <div class="alert alert-danger">
+        @_authenticationErrorText
+    </div>
+}
+
+<EditForm Model="_model" OnValidSubmit="LoginAsync" class="card card-body bg-light mt-5">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label">Email:</label>
+        <div class="col-md-10">
+            <InputText @bind-Value="_model.Email" id="email" class="form-control"/>
+            <ValidationMessage For="@(() => _model.Email)"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label">Password:</label>
+        <div class="col-md-10">
+            <InputText @bind-Value="_model.Password" id="email" class="form-control"/>
+            <ValidationMessage For="@(() => _model.Password)"/>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">Log In</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private AuthenticationUserModel _model = new();
+
+    private bool _showAuthenticationError = false;
+    private string _authenticationErrorText = "";
+
+    private async Task LoginAsync()
+    {
+        _showAuthenticationError = false;
+
+        var result = await _authService.LoginAsync(_model);
+
+        if (result is not null)
+        {
+            _navigationManager.NavigateTo("/");
+        }
+        else
+        {
+            _authenticationErrorText = "There was an error when trying to log in.";
+            _showAuthenticationError = true;
+        }
+    }
+
+}
