@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SN.Entity;
 using SN.Model;
+using SN.Model.Board.Cells;
 
 namespace SN.ClientServices.Mappers
 {
@@ -49,7 +50,7 @@ namespace SN.ClientServices.Mappers
                 {
                     board.DrawingCells[i, j] = cols[j].ToCell();
 
-                    if (board.DrawingCells[i, j].GetState() == CellStateEnum.Filled)
+                    if (board.DrawingCells[i, j] is CellFilled)
                     {
                         if (counting)
                         {
@@ -79,7 +80,7 @@ namespace SN.ClientServices.Mappers
 
                 for (var j = 0; j < rows.Length; j++)
                 {
-                    if (board.DrawingCells[j, i].GetState() == CellStateEnum.Filled)
+                    if (board.DrawingCells[j, i] is CellFilled)
                     {
                         if (counting)
                             rowNums[ind] += 1;

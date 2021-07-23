@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using SN.Model.Board.CellDecoration;
+using SN.Model.Board.Cells;
+using SN.Model.Board.Listener;
 
 namespace SN.Model
 {
     public class BoardModel : Abstract.Model
     {
-        public ICellState[,] DrawingCells { get; }
-        public ICellState[,] ColumnNumberCells { get;  set; }
-        public ICellState[,] RowNumberCells { get;  set; }
-        public ICellState[,] FullBoard { get; set; }
+        public ICellState[,] DrawingCells { get; private set; }
+        public ICellState[,] ColumnNumberCells { get;  private set; }
+        public ICellState[,] RowNumberCells { get;  private set; }
+        public ICellState[,] FullBoard { get; private set; }
+        public int CrossX { get; private set; }
+        public int CrossY { get; private set; }
         public BoardModel(int rows, int columns)
         {
             DrawingCells = new ICellState[rows,columns];
@@ -28,6 +33,9 @@ namespace SN.Model
 
             int crossY = ColumnNumberCells.GetLength(0);
             int crossX = RowNumberCells.GetLength(1);
+
+            CrossY = crossY;
+            CrossX = crossX;
             
             Console.WriteLine($"crossX:{crossX}, crossY:{crossY}, " +
                               $"boardRow:{DrawingCells.GetLength(0)}, " +
@@ -67,12 +75,28 @@ namespace SN.Model
                 for (int j = crossX; j < crossX + DrawingCells.GetLength(1); j++)
                 {
                     fullBoard[i, j] = DrawingCells[i-crossY, j-crossX];
+                    
+                    if ((i+1-crossY)%5 == 0 && i + 1 - crossY <  DrawingCells.GetLength(0))
+                        fullBoard[i, j].CellStyles.Add(new ThickRowStyle());
+                    if ((j+1-crossX)%5 == 0 && j + 1 - crossX <  DrawingCells.GetLength(1))
+                        fullBoard[i, j].CellStyles.Add(new ThickColumnStyle());
                 }
             }
 
             FullBoard = fullBoard;
         }
+        
+        public void Register(IBoardListener listener)
+        {
+            listener.Board = this;
+            foreach (var cell in FullBoard)
+            {
+                cell.Register(listener);
+            }
+        }
     }
+    
+   
     
     
 }

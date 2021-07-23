@@ -1,5 +1,6 @@
 ﻿using System;
 using SN.Model;
+using SN.Model.Board.Cells;
 
 namespace SN.ClientServices.Mappers
 {

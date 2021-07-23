@@ -13,8 +13,12 @@ using SN.ClientServices.Authentication;
 using SN.ClientServices.HttpClients;
 using SN.ClientServices.Services;
 using SN.ClientServices.Services.Abstract;
+using SN.Model.Board.Listener;
+using SN.Model.Board.Solver;
+using SN.Model.Solver;
 
-namespace SN.Blazor
+
+namespace WebApplication
 {
     public class Program
     {
@@ -24,22 +28,28 @@ namespace SN.Blazor
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(
-                sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
-
-            builder.Services.AddHttpClient<FinishedGameHttpClient>();
-            builder.Services.AddHttpClient<GameHttpClient>();
-            builder.Services.AddHttpClient<GridStateHttpClient>();
-            builder.Services.AddHttpClient<RankHttpClient>();
-            builder.Services.AddHttpClient<RatingHttpClient>();
-            builder.Services.AddHttpClient<UnfinishedGameHttpClient>();
-            builder.Services.AddHttpClient<UserHttpClient>();
+                sp => new HttpClient {BaseAddress = new Uri("https://localhost:5001")});
 
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddScoped<IGameService, GameService>();
+            builder.Services.AddScoped<IBoardListener, BoardListener>();
+            builder.Services.AddScoped<IBoardSolver, BoardSolver>();
+
+            builder.Services.AddScoped<FinishedGameHttpClient>();
+            builder.Services.AddScoped<GameHttpClient>();
+            builder.Services.AddScoped<GridStateHttpClient>();
+            builder.Services.AddScoped<RankHttpClient>();
+            builder.Services.AddScoped<RatingHttpClient>();
+            builder.Services.AddScoped<UnfinishedGameHttpClient>();
+            builder.Services.AddScoped<UserHttpClient>();
+
             
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 
+            builder.Services.AddCors();
+            
             await builder.Build().RunAsync();
         }
     }

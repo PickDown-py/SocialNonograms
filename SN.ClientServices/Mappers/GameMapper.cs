@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using SN.Entity;
 using SN.Model;
+using SN.Model.Board.Cells;
 
 namespace SN.ClientServices.Mappers
 {
@@ -50,7 +51,7 @@ namespace SN.ClientServices.Mappers
                 }
             }
             
-            
+            //TODO Don't set FullBoard for Answer
             game.Answer.SetFullBoard(rowCells, colCells);
             game.BoardModel.SetFullBoard(rowCells, colCells);
 

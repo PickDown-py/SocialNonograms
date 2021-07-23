@@ -1,7 +1,10 @@
 ﻿@page "/Game/{Id:int}"
 @using SN.Model
 @using SN.ClientServices.Services.Abstract
+@using SN.Model.Solver
 @inject IGameService _gameService
+@inject IBoardSolver _boardSolver; 
+@inject IJSRuntime _jsRuntime
 
 @if (GameModel is null)
 {
@@ -11,7 +14,7 @@ else
 {
     <div class="container justify-content-center">
         <h3>Game #@Id Name: @GameModel.Name</h3>
-        <Board BoardModel="@GameModel.Answer">
+        <Board BoardModel="@GameModel.BoardModel" BoardSolver="@_boardSolver" OnComplete="@CompleteGame">
 
         </Board>
     </div>
@@ -27,8 +30,14 @@ else
     protected override async void OnInitialized()
     {
         GameModel = await _gameService.GetAsync(Id);
-        Console.WriteLine("Game Received!");
+        _boardSolver.Answer = GameModel.Answer;
+        _boardSolver.Board = GameModel.BoardModel;
         StateHasChanged();
+    }
+
+    public async void CompleteGame()
+    {
+        await _jsRuntime.InvokeVoidAsync("alert", "Game complete!"); // Alert
     }
 
 }

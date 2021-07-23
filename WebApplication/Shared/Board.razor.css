@@ -1,15 +1,14 @@
-﻿table, th, td {
-    border: 3px solid slategrey;
-    border-collapse: collapse;
+﻿th, td {
+    border: 4px solid slategrey;
 }
 
 table {
     width: 47%;
-    table-layout: fixed;
+    border-collapse: collapse;
+    padding: 0;
 }
 td {
     position: relative;
-    vertical-align: top;
 }
 td:after {
     content: '';
@@ -22,13 +21,16 @@ td .content {
     bottom: 0;
     left: 0;
     right: 0;
-    margin-bottom: 80%;
-    float: top;
     text-align: center;
+    box-sizing: border-box;
 }
 
-th, td {
-    padding: 2px;
+.big {
+  padding-top: 0;
+}
+
+.small {
+    
 }
 
 .empty {
@@ -40,24 +42,53 @@ th, td {
 }
 
 .crossed {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    content: "\274c"; /* use the hex value here... */
-    font-size: 50px;
-    color: black;
-    line-height: 100px;
-    text-align: center;
+    font-size: 1.7em;
+    padding-top: 0 !important;
 }
 
 .number {
     background: coral;
     color: white;
+    font-size: 1.8em;
 }
 
 .corner {
     background: white;
     border: 0;
+}
+
+.thick_row {
+    border-bottom-color: coral;
+}
+
+.thick_col {
+    border-right-color: coral;
+}
+
+.selected {
+    border-color: dodgerblue;
+}
+
+.selected-secondary-row {
+    border-bottom-color: dodgerblue;
+}
+
+.selected-secondary-col {
+    border-right-color: dodgerblue;
+}
+
+.error {
+    border-color: red !important;
+}
+
+.error-secondary-row {
+    border-bottom-color: red !important;
+}
+
+.error-secondary-col {
+    border-right-color: red !important;
+}
+
+.crossed-number {
+    text-decoration: line-through;
 }

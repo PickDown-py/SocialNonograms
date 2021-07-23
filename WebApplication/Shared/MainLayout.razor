@@ -1,0 +1,29 @@
+﻿@using SN.ClientServices.Services.Abstract
+@inherits LayoutComponentBase
+@inject IAuthenticationService _authenticationService
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu/>
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            <a href="/verifyAuth" class="ml-md-auto">Verify Auth</a>
+            <button class="btn btn-danger" @onclick="LogOutAsync">Log Out</button>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>
+
+@code
+{
+    private async Task LogOutAsync()
+    {
+        await _authenticationService.LogoutAsync();
+    }
+}

@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.ClientServices", "SN.Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{A6E02BBD-E672-4104-9723-4806D3AAA8C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.Blazor", "SN.Blazor\SN.Blazor.csproj", "{1841A878-0FA3-4FF5-8D07-4EB912A951A5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,9 +48,5 @@ Global
 		{A6E02BBD-E672-4104-9723-4806D3AAA8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6E02BBD-E672-4104-9723-4806D3AAA8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6E02BBD-E672-4104-9723-4806D3AAA8C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1841A878-0FA3-4FF5-8D07-4EB912A951A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1841A878-0FA3-4FF5-8D07-4EB912A951A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1841A878-0FA3-4FF5-8D07-4EB912A951A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1841A878-0FA3-4FF5-8D07-4EB912A951A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
