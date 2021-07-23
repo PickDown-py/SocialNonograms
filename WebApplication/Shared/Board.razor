@@ -1,4 +1,5 @@
 ﻿@using SN.Model
+@using SN.Model.Board.Cells
 @using SN.Model.Board.Listener
 @using SN.Model.Solver
 @inject IBoardListener _listener
@@ -14,7 +15,9 @@
                     var colNum = col;
                     <td class="@BoardModel.FullBoard[row,col].GetCellStyles()">
                         <div class="content big"  
-                             @onclick="@(e => HandleLeftClick(e, rowNum, colNum))" 
+                             @onmousedown="@(e => HandleMouseDown(e, rowNum, colNum))" 
+                             @onmouseover="@(_ => HandleMouseEnter(rowNum, colNum))"
+                             @onmouseup="@(e => HandleMouseUp(e, rowNum, colNum))"
                              @oncontextmenu="@(e => HandleRightClick(e, rowNum, colNum))" 
                              @oncontextmenu:preventDefault="true">
                              @BoardModel.FullBoard[row, col].Content
@@ -44,14 +47,34 @@
         BoardModel.Register(_listener);
     }
 
-    private void HandleLeftClick(MouseEventArgs args, int row, int col)
+    private void HandleMouseDown(MouseEventArgs args, int row, int col)
     {
+        if (args.Button != 0)
+            return;
         if (!_isComplete)
         {
             BoardModel.FullBoard[row, col].OnLeftMouseClick(row, col);
             _isComplete = CheckComplete();
             if (_isComplete)
                 OnComplete.InvokeAsync();
+        }
+    }
+    
+    private void HandleMouseEnter(int row, int col)
+    {
+        if (!_isComplete)
+        {
+            _listener.OnMouseMove(new RowColPair(row, col));
+        }
+    }
+    
+    private void HandleMouseUp(MouseEventArgs mouseEventArgs, int row, int col)
+    {
+        if (mouseEventArgs.Button != 0)
+            return;
+        if (!_isComplete)
+        {
+            _listener.OnMouseUp(new RowColPair(row, col));
         }
     }
 
@@ -70,5 +93,4 @@
     {
         return BoardSolver.IsComplete();
     }
-
 }

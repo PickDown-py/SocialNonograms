@@ -15,14 +15,14 @@ namespace SN.Model.Board.Cells
         
         public void OnLeftMouseClick(int row, int col)
         {
-            LeftMouseClick?.Invoke(this, new BoardEventArgs(row, col));
+            LeftMouseClick?.Invoke(this, new RowColPair(row, col));
         }
         
         public event BoardEvent RightMouseClick;
         
         public void OnRightMouseClick(int row, int col)
         {
-            RightMouseClick?.Invoke(this, new BoardEventArgs(row, col));
+            RightMouseClick?.Invoke(this, new RowColPair(row, col));
         }
         public virtual string Content { get; set; }
 

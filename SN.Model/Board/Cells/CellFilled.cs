@@ -7,7 +7,7 @@ namespace SN.Model.Board.Cells
         protected override string Style => "filled";
         public override void Register(IBoardListener listener)
         {
-            LeftMouseClick += listener.FilledLeftMouseClick;
+            LeftMouseClick += listener.FilledLeftMouseDown;
         }
         public override char ToChar()
         {

@@ -7,7 +7,7 @@ namespace SN.Model.Board.Cells
         protected override string Style => "empty";
         public override void Register(IBoardListener listener)
         {
-            LeftMouseClick += listener.EmptyLeftMouseClick;
+            LeftMouseClick += listener.EmptyLeftMouseDown;
             RightMouseClick += listener.EmptyRightMouseClick;
         }
         public override char ToChar()
