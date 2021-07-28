@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>WebApplication</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,6 +20,21 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SN.ClientServices\SN.ClientServices.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\media\icons" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\media\fonts\slkscr.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\media\fonts\slkscrb.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\media\fonts\slkscre.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\media\fonts\slkscreb.ttf" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\media\icons\star.ico" />
     </ItemGroup>
 
 </Project>

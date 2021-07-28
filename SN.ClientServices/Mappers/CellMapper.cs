@@ -10,10 +10,10 @@ namespace SN.ClientServices.Mappers
         {
             return c switch
             {
-                " "  => new CellEmpty(),
+                " " => new CellEmpty(),
                 "x" => new CellCrossed(),
                 "o" => new CellFilled(),
-                _ => throw new ArgumentException("Invalid char." + "{"+c+"}")
+                _ => throw new ArgumentException($"Invalid char {{{c}}}")
             };
         }
     }

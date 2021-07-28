@@ -1,4 +1,12 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿@font-face {
+    font-family: "PixelOperator";
+
+    src: 
+    url('fonts/PixelOperator.eot') format('embedded-opentype'),
+    url('fonts/PixelOperator.woff') format('woff'),
+    url('fonts/PixelOperator.ttf')  format('truetype'),
+    url('fonts/PixelOperator.svg#svgFontName') format('svg');
+}
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

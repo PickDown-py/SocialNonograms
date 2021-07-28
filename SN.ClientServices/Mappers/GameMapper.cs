@@ -16,6 +16,7 @@ namespace SN.ClientServices.Mappers
                 Rows = entity.Rows,
                 Columns = entity.Columns,
                 RatingScore = entity.RatingScore,
+                Author = entity.Author.ToModel(),
                 BoardModel = new BoardModel(entity.Rows, entity.Columns),
             };
 

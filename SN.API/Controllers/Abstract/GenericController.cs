@@ -9,23 +9,23 @@ namespace SN.API.Controllers.Abstract
 {
     public abstract class GenericController<TEntity, TKey> : ControllerBase where TEntity : class, IEntity<TKey>
     {
-        private readonly IService<TEntity, TKey> _service;
+        protected readonly IService<TEntity, TKey> Service;
         
         protected GenericController(IService<TEntity, TKey> service)
         {
-            _service = service;
+            Service = service;
         }
         
         [HttpGet]
         public virtual async Task<IEnumerable<TEntity>> Get()
         {
-            return await _service.GetAllAsync();
+            return await Service.GetAllAsync();
         }
         
         [HttpGet("{key}")]
         public virtual async Task<ActionResult<TEntity>> Get(TKey key)
         {
-            var entity = await _service.GetAsync(key);
+            var entity = await Service.GetAsync(key);
             if (entity == null)
                 return NotFound();
             return new ObjectResult(entity);
@@ -36,7 +36,7 @@ namespace SN.API.Controllers.Abstract
         {
             if (entity == null)
                 return BadRequest();
-            _service.Add(entity);
+            Service.Add(entity);
             return Ok(entity);
         }
 
@@ -45,9 +45,9 @@ namespace SN.API.Controllers.Abstract
         {
             if (entity == null)
                 return BadRequest();
-            if (await _service.ExistsAsync(entity.Id))
+            if (await Service.ExistsAsync(entity.Id))
                 return NotFound();
-            _service.Replace(entity);
+            Service.Replace(entity);
             return Ok(entity);
         }
 
@@ -55,20 +55,20 @@ namespace SN.API.Controllers.Abstract
         public virtual async Task<ActionResult<TEntity>> Patch(TKey key, 
             [FromBody] JsonPatchDocument<TEntity> patchDocument)
         {
-            var entity = await _service.GetAsync(key);
+            var entity = await Service.GetAsync(key);
             if (entity== null)
                 return NotFound();
             patchDocument.ApplyTo(entity);
-            _service.Update(entity);
+            Service.Update(entity);
             return Ok(entity);
         }
 
         [HttpDelete("{key}")]
         public virtual async Task<ActionResult<TEntity>> Delete(TKey key)
         {
-            if (await _service.ExistsAsync(key))
+            if (await Service.ExistsAsync(key))
                 return NotFound();
-            _service.Remove(key);
+            Service.Remove(key);
             return Ok(key);
         }
     }

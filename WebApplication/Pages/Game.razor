@@ -1,4 +1,6 @@
 ﻿@page "/Game/{Id:int}"
+@attribute [Authorize]
+
 @using SN.Model
 @using SN.ClientServices.Services.Abstract
 @using SN.Model.Solver
@@ -6,17 +8,40 @@
 @inject IBoardSolver _boardSolver; 
 @inject IJSRuntime _jsRuntime
 
+
+
 @if (GameModel is null)
 {
     <h3>Retrieving the Game</h3>
 }
 else
 {
-    <div class="container justify-content-center">
-        <h3>Game #@Id Name: @GameModel.Name</h3>
+    <div class="container">
+        <div>
+            <h2 class="text-center" >
+                <img style="width: 80px; height: 80px;" class="element-header" src="media/icons/game_icon.ico"/>
+                Game's Name: @GameModel.Name
+            </h2>
+        </div>
         <Board BoardModel="@GameModel.BoardModel" BoardSolver="@_boardSolver" OnComplete="@CompleteGame">
 
         </Board>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-2 p-2">
+                        <img style="width: 70px; height: 70px; top:  10% !important;" class="element text-right" src="media/icons/user_icon.png"/>
+                    </div>
+                    <div class="col-10 p-2">
+                        <h4 class="focus-color">Author: <a class="text-color-focus" href="User/@GameModel.Author.Id">@GameModel.Author.Name</a></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
     </div>
 }
 
@@ -41,3 +66,4 @@ else
     }
 
 }
+

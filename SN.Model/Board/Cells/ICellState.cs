@@ -18,16 +18,16 @@ namespace SN.Model.Board.Cells
         public char ToChar();
     }
 
-    public delegate void BoardEvent(object sender, BoardEventArgs args);
+    public delegate void BoardEvent(object sender, RowColPair args);
 
-    public class BoardEventArgs
+    public class RowColPair
     {
-        public BoardEventArgs(int row, int col)
+        public RowColPair(int row, int col)
         {
             Row = row;
             Column = col;
         }
-        public int Row { get; }
-        public int Column { get; }
+        public int Row { get; set; }
+        public int Column { get; set; }
     }
 }

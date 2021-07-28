@@ -8,6 +8,7 @@ namespace SN.Model.Board.Cells
         public override void Register(IBoardListener listener)
         {
             LeftMouseClick += listener.NumberLeftMouseClick;
+            RightMouseClick += listener.NumberRightMouseClick;
         }
 
         public override char ToChar()

@@ -1,0 +1,32 @@
+﻿.focus-color{
+    color: #ff7e3f;
+}
+
+.frame {
+    height: 160px; /* Can be anything */
+    width: 160px; /* Can be anything */
+    position: relative;
+}
+.frame img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.element {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.element-header {
+    position: relative;
+    transform: translateY(-8%);
+}

@@ -2,6 +2,6 @@
 {
     public class ErrorMainStyle : ICellStyle
     {
-        public string Style { get; } = "error-main";
+        public string Style { get; } = "error";
     }
 }

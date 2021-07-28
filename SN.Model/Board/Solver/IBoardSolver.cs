@@ -4,6 +4,7 @@
     {
         BoardModel Answer { get; set; }
         BoardModel Board { get; set; }
+        public void DetectErrors();
         bool IsComplete();
     }
 }

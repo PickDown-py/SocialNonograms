@@ -26,7 +26,7 @@ namespace SN.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\MSSQLLocalDB;Database=SocialNonogramsDb;Trusted_Connection=True;");
+                @"Server=(localdb)\MSSQLLocalDB;Database=SocialNonogramsDb-2;Trusted_Connection=True;");
         }
     }
 }

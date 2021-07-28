@@ -25,9 +25,6 @@
         }
     </table>
 </div>
-<br/>
-<br/>
-<br/>   
 
 @code {
     [Parameter]
@@ -52,6 +49,7 @@
             _isComplete = CheckComplete();
             if (_isComplete)
                 OnComplete.InvokeAsync();
+            BoardSolver.DetectErrors();
         }
     }
 
@@ -63,6 +61,7 @@
             _isComplete = CheckComplete();
             if (_isComplete)
                 OnComplete.InvokeAsync();
+            BoardSolver.DetectErrors();
         }
     }
 
