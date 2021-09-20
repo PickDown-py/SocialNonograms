@@ -1,9 +1,9 @@
 # SocialNonograms
 
-![img.png](img.png)
+![](photo_2021-09-20_11-09-14.jpg)
 
-![img_1.png](img_1.png)
+![](duck-1.png)
 
-![img_2.png](img_2.png)
+![](duck-2.png)
 
-![img_3.png](img_3.png)
+![](duck-3.png)
