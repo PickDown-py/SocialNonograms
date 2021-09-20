@@ -51,8 +51,7 @@ namespace SN.API
                 .AddControllersWithViews()
                 .AddNewtonsoftJson();
             
-            services.AddDbContext<SocialNonogramsContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("SocialNonogramsDb")));
+            services.AddDbContext<SocialNonogramsContext>();
             
             services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
             services.AddScoped(typeof(IService<,>), typeof(GenericService<,>));
